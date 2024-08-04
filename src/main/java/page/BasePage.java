@@ -1,14 +1,14 @@
-package pages;
+package page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import providers.ConfigProviders;
+import provider.ConfigProviders;
 
 import java.time.Duration;
 
-import static drivers.HeadDriver.getDriver;
+import static driver.HeadDriver.getDriver;
 
 public abstract class BasePage {
     public static WebDriverWait getExplicityWait() {

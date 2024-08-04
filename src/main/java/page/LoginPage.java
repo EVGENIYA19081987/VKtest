@@ -1,7 +1,6 @@
-package pages;
+package page;
 
 import org.openqa.selenium.By;
-import providers.DataProviders;
 
 public class LoginPage extends BasePage {
     By loginButton = By.xpath("//input[@id='index_email']");

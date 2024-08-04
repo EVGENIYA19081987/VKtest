@@ -1,9 +1,9 @@
-package BaseTest;
+package base_test;
 
-import drivers.HeadDriver;
+import driver.HeadDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import providers.DataProviders;
+import provider.DataProviders;
 
 public abstract class SetDriverTest {
 

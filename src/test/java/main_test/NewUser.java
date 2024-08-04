@@ -1,12 +1,12 @@
-package MainTest;
+package main_test;
 
-import BaseTest.SetDriverTest;
+import base_test.SetDriverTest;
 import helper.StringHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.VKpage;
-import providers.DataProviders;
+import page.LoginPage;
+import page.VKpage;
+import provider.DataProviders;
 
 public class NewUser extends SetDriverTest {
     @Test
