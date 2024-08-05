@@ -4,23 +4,14 @@ import org.openqa.selenium.By;
 
 public class VKpage extends BasePage {
 
-    By profile = By.xpath("//span[text()='My profile']");
-    By wallPost = By.xpath("//div[text()='Привет, Крош']/..");
+    By profileButton = By.xpath("//span[text()='My profile']");
 
     public VKpage() {
-        waitVisibleOfElement(profile);
+        waitVisibleOfElement(profileButton);
     }
 
-    public VKpage getProfile(){
-        waitVisibleOfElement(profile).click();
-        return this;
-    }
-
-    public String getTextFromPost() {
-        return waitVisibleOfElement(wallPost).getText();
-    }
-
-    public boolean isVisible() {
-        return waitVisibleOfElement(wallPost).isDisplayed();
+    public UserProfilePage clickToMyProfileButton() {
+        waitVisibleOfElement(profileButton).click();
+        return new UserProfilePage();
     }
 }
