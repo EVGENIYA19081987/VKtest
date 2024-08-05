@@ -8,6 +8,7 @@ public class PasswordPage extends BasePage {
     public PasswordPage(){
         waitVisibleOfElement(passButton);
     }
+
     public VKpage typePassword(String pass) {
         waitVisibleOfElement(passButton).sendKeys(pass);
         waitVisibleOfElement(continueButton).click();

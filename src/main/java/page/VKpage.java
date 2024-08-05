@@ -2,7 +2,7 @@ package page;
 
 import org.openqa.selenium.By;
 
-public class VKpage extends BasePage{
+public class VKpage extends BasePage {
 
     By profile = By.xpath("//span[text()='My profile']");
     By wallPost = By.xpath("//div[text()='Привет, Крош']/..");
@@ -11,10 +11,16 @@ public class VKpage extends BasePage{
         waitVisibleOfElement(profile);
     }
 
+    public VKpage getProfile(){
+        waitVisibleOfElement(profile).click();
+        return this;
+    }
+
     public String getTextFromPost() {
         return waitVisibleOfElement(wallPost).getText();
     }
 
-    public boolean isDisplayed() {
-    return waitVisibleOfElement(wallPost).isDisplayed();
-}}
+    public boolean isVisible() {
+        return waitVisibleOfElement(wallPost).isDisplayed();
+    }
+}

@@ -1,5 +1,7 @@
 package main_test;
-
+//1) Залогининться под логином и паролем, написанным выше.
+//2) Перейти в свой профиль.
+//3) Получить текст из последнего опубликованного поста на стене
 import base_test.SetDriverTest;
 import helper.StringHelper;
 import org.testng.Assert;
@@ -14,8 +16,14 @@ public class NewUser extends SetDriverTest {
 
         VKpage user = new LoginPage()
                 .pushLoginButton(DataProviders.LOGIN)
-                .typePassword(DataProviders.PASSWORD);
-        Assert.assertTrue(user.isDisplayed());
+                .typePassword(DataProviders.PASSWORD)
+                .getProfile();
+        Assert.assertTrue(user.isVisible());
         Assert.assertEquals(user.getTextFromPost(), StringHelper.TEXT);
+    }
+
+    @Test
+    public void createText(){
+        
     }
 }
