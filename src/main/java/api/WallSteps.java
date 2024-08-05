@@ -21,6 +21,6 @@ public class WallSteps {
                 .param("v", "5.199")
                 .contentType(ContentType.JSON)
                 .when().post()
-                .then().statusCode(SC_OK);
+                .then().statusCode(SC_OK).log();
     }
 }
