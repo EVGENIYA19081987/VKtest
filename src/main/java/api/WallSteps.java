@@ -7,7 +7,6 @@ import static org.apache.http.HttpStatus.SC_OK;
 
 public class WallSteps {
 
-
     public static void createPost(String message) {
         given()
                 .relaxedHTTPSValidation()  // для решения проблемы с сертификатами (HTTPS)
