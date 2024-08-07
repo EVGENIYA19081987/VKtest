@@ -4,6 +4,7 @@ package provider;
 import java.util.ResourceBundle;
 
 public class DataProviders {
+    public static String API_URL=getValue("api.url");
     public static String URL = getValue("url");
     public static String LOGIN=getValue("login");
     public static String PASSWORD=getValue("password");
