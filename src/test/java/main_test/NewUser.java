@@ -22,8 +22,4 @@ public class NewUser extends SetDriverTest {
         Assert.assertEquals(user.getTextFromPost(), StringHelper.TEXT);
     }
 
-    @Test
-    public void createText(){
-        
-    }
 }
