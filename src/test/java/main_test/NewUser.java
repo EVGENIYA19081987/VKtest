@@ -29,5 +29,6 @@ public class NewUser extends SetDriverTest {
         WallSteps.createPostWithPhoto(WallPostConstant.FIRST_POST_TEXT, PhotoConstant.attachePhoto());
 
 //        5) Получить текст из нового поста при помощи апи метода.
+        WallSteps.getTextFromPost();
     }
 }
