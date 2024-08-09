@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.LoginPage;
 import page.UserProfilePage;
+import constant.PhotoConstant;
 import provider.DataProviders;
 
 public class NewUser extends SetDriverTest {
@@ -23,5 +24,10 @@ public class NewUser extends SetDriverTest {
 
         WallSteps.createPost(WallPostConstant.FIRST_POST_TEXT);
         Assert.assertEquals(userProfilePage.getTextFromPost(), WallPostConstant.FIRST_POST_TEXT);
+
+//        4) Создать новый пост с текстом и картинкой. (При помощи АПИ)
+        WallSteps.createPostWithPhoto(WallPostConstant.FIRST_POST_TEXT, PhotoConstant.attachePhoto());
+
+//        5) Получить текст из нового поста при помощи апи метода.
     }
 }
