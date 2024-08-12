@@ -118,5 +118,7 @@ public class WallSteps {
         System.out.println(photoTemplate);
 
         createPostWithPhoto("привет, Крош!", photoTemplate);
+
+        //  https://jsonformatter.curiousconcept.com/#
     }
 }
