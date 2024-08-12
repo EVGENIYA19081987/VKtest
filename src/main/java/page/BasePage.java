@@ -1,5 +1,6 @@
 package page;
 
+import driver.HeadDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +13,7 @@ import static driver.HeadDriver.getDriver;
 
 public abstract class BasePage {
     public static WebDriverWait getExplicityWait() {
-        return new WebDriverWait(getDriver(), Duration.ofSeconds(ConfigProviders.EXPLICITY_WAIT));
+        return new WebDriverWait(HeadDriver.getDriver(), Duration.ofSeconds(ConfigProviders.EXPLICITY_WAIT));
     }
 
     public static WebElement waitVisibleOfElement(By element) {
