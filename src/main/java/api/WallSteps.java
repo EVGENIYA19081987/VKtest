@@ -3,16 +3,16 @@ package api;
 import constant.ApiPathConstants;
 import constant.UserIdConstant;
 import constant.WallPostConstant;
-import io.restassured.RestAssured;
 import org.apache.hc.core5.http.HttpStatus;
 import provider.ConfigProviders;
 import provider.DataProviders;
 
+import static io.restassured.RestAssured.given;
 
 public class WallSteps {
 
     public static void createPost(String message) {
-        RestAssured.given()
+        given()
                 .relaxedHTTPSValidation()  // для решения проблемы с сертификатами (HTTPS)
                 .baseUri(DataProviders.API_URL)
                 .basePath("/wall.post")
@@ -25,10 +25,8 @@ public class WallSteps {
                 .then().statusCode(HttpStatus.SC_OK).log();
     }
 
-
-
     public static void createPostWithPhoto(String message, String attachment) {
-        RestAssured.given()
+        given()
                 .relaxedHTTPSValidation()
                 .baseUri(DataProviders.API_URL)
                 .basePath("/wall.post")
@@ -43,7 +41,7 @@ public class WallSteps {
     }
 
     public static void getTextFromPost() {
-        RestAssured.given()
+        given()
                 .relaxedHTTPSValidation()
                 .baseUri(DataProviders.API_URL)
                 .basePath("/wall.get")
@@ -54,5 +52,4 @@ public class WallSteps {
                 .when().get(WallPostConstant.FIRST_POST_TEXT)
                 .then().statusCode(HttpStatus.SC_OK).log();
     }
-
 }
