@@ -5,13 +5,16 @@ package main_test;
 
 import api.WallSteps;
 import base_test.SetDriverTest;
-import constant.PhotoConstant;
+import constant.UserIdConstant;
 import constant.WallPostConstant;
+import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.LoginPage;
 import page.UserProfilePage;
 import provider.DataProviders;
+import static api.WallSteps.*;
+
 
 public class NewUser extends SetDriverTest {
     @Test
@@ -21,15 +24,31 @@ public class NewUser extends SetDriverTest {
                 .setPasswordAndNavigateToMainPage(DataProviders.PASSWORD)
                 .clickToMyProfileButton();
         Assert.assertEquals(userProfilePage.getTextFromPost(), WallPostConstant.FIRST_POST_TEXT);
+//       Создать пост с текстом
+        WallSteps.createPost("Юхуууу!!");
 
-        WallSteps.createPost(WallPostConstant.FIRST_POST_TEXT);
-        Assert.assertEquals(userProfilePage.getTextFromPost(), WallPostConstant.FIRST_POST_TEXT);
+//        Получить текст из нового поста при помощи апи метода.
+        WallSteps.getTextFromPostByIndex(3);
 
-//        4) Создать новый пост с текстом и картинкой. (При помощи АПИ)
-        WallSteps.createPostWithPhoto(WallPostConstant.FIRST_POST_TEXT, PhotoConstant.attachePhoto());
+//        Написать комментарий к посту:
+        createComment("Приветики", 540);
 
-//        5) Получить текст из нового поста при помощи апи метода.
-        WallSteps.getTextFromPostByIndex(0);
-        int i = 0;
+//        Создать пост с картинкой
+
+        String server = getWallUploadServer();
+        System.out.println(server);
+
+        JSONObject jsonObject = new JSONObject(postPhotoToServer(server));
+
+        String mediaId = getIdPhotoFromServer(
+                jsonObject.getString("photo"),
+                jsonObject.getInt("server"),
+                jsonObject.getString("hash"));
+
+        JSONObject photos = new JSONObject(mediaId);
+        String photoTemplate = String.format("photo%s_%d", UserIdConstant.UserID,
+                photos.getJSONArray("response").getJSONObject(0).getInt("id"));
+
+            createPostWithPhoto("Incredible", photoTemplate);
     }
 }

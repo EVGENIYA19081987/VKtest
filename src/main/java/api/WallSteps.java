@@ -4,7 +4,6 @@ import constant.ApiPathConstants;
 import constant.UserIdConstant;
 import io.restassured.http.ContentType;
 import org.apache.hc.core5.http.HttpStatus;
-import org.json.JSONObject;
 import provider.ConfigProviders;
 import provider.DataProviders;
 
@@ -14,8 +13,8 @@ import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class WallSteps {
-    private final static File photo =
-            new File(System.getProperty("user.dir") + "//src//main//resources//photo.jpg");
+    private static File photo =
+            new File(System.getProperty("user.dir") + "//src//main//resources//Krosh.jpg");
 
     public static void createPost(String message) {
         given()
@@ -26,11 +25,25 @@ public class WallSteps {
                 .param("message", message)
                 .param("access_token", ApiPathConstants.TOKEN)
                 .param("v", ConfigProviders.API_VERSION)
-                .contentType(io.restassured.http.ContentType.JSON)
+                .contentType(ContentType.JSON)
                 .when().post()
                 .then().statusCode(HttpStatus.SC_OK).log();
     }
+    public static void createComment(String attachment, int postId){
+        given()
+                .relaxedHTTPSValidation()
+                .baseUri(DataProviders.API_URL)
+                .basePath("/wall.createComment")
+                .param("owner_id",UserIdConstant.UserID)
+                .param("post_id",postId)
+                .queryParam("attachments", attachment)
+                .param("access_token",ApiPathConstants.TOKEN)
+                .param("v", ConfigProviders.API_VERSION)
+                .contentType(ContentType.JSON)
+                .when().get()
+                .then().log().all();
 
+    }
     public static void createPostWithPhoto(String message, String attachment) {
         given()
                 .relaxedHTTPSValidation()
@@ -98,27 +111,5 @@ public class WallSteps {
                 .statusCode(SC_OK)
                 .extract().asString();
     }
-
-    public static void main(String[] args) {
-        String server = getWallUploadServer();
-        System.out.println(server);
-
-        JSONObject jsonObject = new JSONObject(postPhotoToServer(server));
-
-        String mediaId = getIdPhotoFromServer(
-                jsonObject.getString("photo"),
-                jsonObject.getInt("server"),
-                jsonObject.getString("hash"));
-
-        JSONObject photos = new JSONObject(mediaId);
-
-        String photoTemplate = String.format("photo%s_%d", UserIdConstant.UserID,
-                photos.getJSONArray("response").getJSONObject(0).getInt("id"));
-
-        System.out.println(photoTemplate);
-
-        createPostWithPhoto("привет, Крош!", photoTemplate);
-
         //  https://jsonformatter.curiousconcept.com/#
     }
-}
