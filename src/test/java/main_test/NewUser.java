@@ -24,14 +24,14 @@ public class NewUser extends SetDriverTest {
                 .setPasswordAndNavigateToMainPage(DataProviders.PASSWORD)
                 .clickToMyProfileButton();
         Assert.assertEquals(userProfilePage.getTextFromPost(), WallPostConstant.FIRST_POST_TEXT);
-//       Создать пост с текстом
-        WallSteps.createPost("Юхуууу!!");
+
+
 
 //        Получить текст из нового поста при помощи апи метода.
         WallSteps.getTextFromPostByIndex(3);
 
 //        Написать комментарий к посту:
-        createComment("Приветики", 540);
+        createComment("Приветики", 550);
 
 //        Создать пост с картинкой
 
@@ -50,5 +50,12 @@ public class NewUser extends SetDriverTest {
                 photos.getJSONArray("response").getJSONObject(0).getInt("id"));
 
             createPostWithPhoto("Incredible", photoTemplate);
+            createCommentWithPhoto("Классный заяц",photoTemplate,550);
+    }
+    public static void main(String[] args) {
+        //       Создать пост с текстом
+        WallSteps.createPost("Юхуууу!!");
+       createComment("ho ho ho",552);
     }
 }
+

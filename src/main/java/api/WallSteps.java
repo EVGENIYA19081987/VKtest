@@ -29,13 +29,29 @@ public class WallSteps {
                 .when().post()
                 .then().statusCode(HttpStatus.SC_OK).log();
     }
-    public static void createComment(String attachment, int postId){
+    public static void createComment(String message, int postId){
         given()
                 .relaxedHTTPSValidation()
                 .baseUri(DataProviders.API_URL)
                 .basePath("/wall.createComment")
                 .param("owner_id",UserIdConstant.UserID)
                 .param("post_id",postId)
+                .queryParam("message", message)
+                .param("access_token",ApiPathConstants.TOKEN)
+                .param("v", ConfigProviders.API_VERSION)
+                .contentType(ContentType.JSON)
+                .when().get()
+                .then().log().all();
+
+    }
+    public static void createCommentWithPhoto(String message,String attachment, int postId){
+        given()
+                .relaxedHTTPSValidation()
+                .baseUri(DataProviders.API_URL)
+                .basePath("/wall.createComment")
+                .param("owner_id",UserIdConstant.UserID)
+                .param("post_id",postId)
+                .queryParam("message", message)
                 .queryParam("attachments", attachment)
                 .param("access_token",ApiPathConstants.TOKEN)
                 .param("v", ConfigProviders.API_VERSION)
