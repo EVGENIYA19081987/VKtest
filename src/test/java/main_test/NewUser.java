@@ -1,7 +1,4 @@
 package main_test;
-//1) Залогининться под логином и паролем, написанным выше.
-//2) Перейти в свой профиль.
-//3) Получить текст из последнего опубликованного поста на стене
 
 import api.WallSteps;
 import base_test.SetDriverTest;
@@ -13,6 +10,7 @@ import org.testng.annotations.Test;
 import page.LoginPage;
 import page.UserProfilePage;
 import provider.DataProviders;
+
 import static api.WallSteps.*;
 
 
@@ -24,7 +22,6 @@ public class NewUser extends SetDriverTest {
                 .setPasswordAndNavigateToMainPage(DataProviders.PASSWORD)
                 .clickToMyProfileButton();
         Assert.assertEquals(userProfilePage.getTextFromPost(), WallPostConstant.FIRST_POST_TEXT);
-
 
 
 //        Получить текст из нового поста при помощи апи метода.
@@ -49,13 +46,14 @@ public class NewUser extends SetDriverTest {
         String photoTemplate = String.format("photo%s_%d", UserIdConstant.UserID,
                 photos.getJSONArray("response").getJSONObject(0).getInt("id"));
 
-            createPostWithPhoto("Incredible", photoTemplate);
-            createCommentWithPhoto("Классный заяц",photoTemplate,550);
+        createPostWithPhoto("Incredible", photoTemplate);
+        createCommentWithPhoto("Классный заяц", photoTemplate, 550);
     }
+
     public static void main(String[] args) {
         //       Создать пост с текстом
         WallSteps.createPost("Юхуууу!!");
-       createComment("ho ho ho",552);
+        createComment("ho ho ho", 552);
     }
 }
 
